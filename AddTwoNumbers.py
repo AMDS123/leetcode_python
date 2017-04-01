@@ -20,12 +20,14 @@ class Solution(object):
         :type l2: ListNode
         :rtype: ListNode
         """
+        def V(val):
+            return val is not None
         result = None
         pre = None
         tag = 0
-        while l1 is not None or l2 is not None:
-            l1_val = l1 is not None and l1.val or 0
-            l2_val = l2 is not None and l2.val or 0
+        while V(l1) or V(l2):
+            l1_val = V(l1) and l1.val or 0
+            l2_val = V(l2) and l2.val or 0
             val = l1_val + l2_val + tag
             tag = val / 10
             node = ListNode(val % 10)
@@ -35,9 +37,9 @@ class Solution(object):
             else:
                 pre.next = node
                 pre = node
-            if l1 is not None:
+            if V(l1):
                 l1 = l1.next
-            if l2 is not None:
+            if V(l2):
                 l2 = l2.next
 
         if tag == 1:
